@@ -1,0 +1,127 @@
+  //
+  //
+  //
+  //
+  //
+  //--Assignment-Task-01----------------------------------------
+  public static void mostWater( Integer[] height ){
+      
+      int l = height.length;
+      int maxm = 0;
+      
+      for (int i = 0; i<l; i++) {
+        for (int j = 0; j<l; j++) {
+          int dis = 0;
+          int lower = 0;
+          
+          if (i==j) {
+            continue;}
+          else if (i>j) {
+            dis = i-j;}
+          else if (j>i) {
+            dis = j-i;}
+          
+          if (height[i]>height[j]) {
+            lower = height[j];}
+          else {
+            lower = height[i];}
+          
+          int mul = lower * dis;
+          if (mul>maxm) {
+            maxm = mul;}}}
+      
+      System.out.println(maxm);}
+  //
+  //
+  //
+  //
+  //
+  //--Assignment-Task-02----------------------------------------
+    public static Integer rowRotation( Integer examWeek, String[][] matrix ){
+      
+      int row = matrix.length;
+      int col = matrix[0].length;
+      Integer num = -1;
+      
+      for (int i = 1; i<examWeek; i++) {
+      
+        for(int c = 0; c<col; c++) {
+          String first = "";
+          for(int r = (row-1); r>-1; r--) {
+          
+            if (r==(row-1)) {
+              first = matrix[r][c];}
+          
+            else if (r==0) {
+              matrix[r+1][c] = matrix[r][c];
+              matrix[r][c] = first;}
+          
+            else {
+              matrix[r+1][c] = matrix[r][c];}}}}
+      
+        for(int r = 0; r<row; r++) {
+          System.out.print("| ");
+          for(int c = 0; c<col; c++) {
+            
+            if (matrix[r][c]=="AA") {
+              num = r+1;}
+            
+            if (matrix[r][c].length()==2) {
+              System.out.print(matrix[r][c]+" | ");}
+            
+            else {
+              System.out.print(matrix[r][c]+"  | ");}}
+          
+            System.out.println("");}
+        return num;}
+  //
+  //
+  //
+  //
+  //
+  //--Assignment-Task-03----------------------------------------
+    public static Integer[][] compressMatrix( Integer[][] matrix ){
+      
+      int row = matrix.length;
+      int col = matrix[0].length;
+      Integer [][] cm = new Integer [row/2] [col/2];
+      
+      for(int r = 0; r<row; r++) {
+          for(int c = 0; c<col; c++) {
+            if ((r%2==0) && (c%2==0)) {
+              cm [r/2] [c/2] = matrix[r][c] + matrix[r+1][c] + matrix[r][c+1] + matrix[r+1][c+1];}}}
+      return cm;}
+  //
+  //
+  //
+  //
+  //
+  //--Assignment-Task-04----------------------------------------
+    public static void playGame( Integer[][] arena ){
+      
+      int row = arena.length;
+      int col = arena[0].length;
+      int points = 0;
+      
+      for(int r = 0; r<row; r++) {
+          for(int c = 0; c<col; c++) {
+            
+            if (arena[r][c]%50 == 0 && arena[r][c]!= 0) {
+              
+              if (r!=row-1 && arena[r+1][c]==2) {
+                points = points + 2;}
+              
+              if (r!=0 && arena[r-1][c]==2) {
+                points = points + 2;}
+              
+              if (c!=col-1 && arena[r][c+1]==2) {
+                points = points + 2;}
+              
+              if (c!=0 && arena[r][c-1]==2) {
+                points = points + 2;}}}}
+      
+      if (points<10) {
+        System.out.println("Points Gained: "+ points +". Your team is out.");}
+      
+      else {
+        System.out.println("Points Gained: "+ points +". Your team has survived the game.");}}

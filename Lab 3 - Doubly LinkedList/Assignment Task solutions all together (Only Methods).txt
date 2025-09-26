@@ -1,0 +1,93 @@
+
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-05--------------------------
+    public static void sumOddAppend(Node dh) {
+      
+      Node n = dh.next;
+      Node prev = dh;
+      int sum = 0;
+      
+      while (n != dh) {
+        if ((int)n.elem % 2 != 0) {
+          prev.next = n.next;
+          sum += (int)n.elem;}
+        prev = n;
+        n = n.next;}
+      
+      Node sumnode = new Node (sum);
+      sumnode.next = dh;
+      prev.next = sumnode;
+      
+    }
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-06--------------------------
+    public static void pairJoin(DNode dh1, DNode dh2) {
+      
+      DNode a = dh1.next.next;
+      DNode atemp = a.prev;
+      DNode b = dh2.next.next;
+      DNode btemp = b.prev;
+      
+      while (a.next != null) {
+        atemp.next = btemp;
+        btemp.next = a;
+        a.prev = btemp;
+        btemp.prev = atemp;
+        a = a.next;
+        b = b.next;
+        atemp = a.prev;
+        btemp = b.prev;}
+      
+      atemp.next = btemp;
+      btemp.next = a;
+      a.prev = btemp;
+      btemp.prev = atemp;
+      a.next = b;
+      b.prev = a;
+      b.next = dh1;
+      dh1.prev = b;
+      
+    }
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-07--------------------------
+    public static void rangeMove(DNode dh, int start, int end) {
+      
+      DNode n = dh.next;
+      DNode last = dh.prev;
+      DNode endnode = dh.prev;
+      DNode next = null;
+      
+      while (n != dh) {
+        
+        int elem = (int)n.elem;
+        if (elem>=start && elem<=end) {
+          next = n.next;
+          n.prev.next = n.next;
+          n.next.prev = n.prev;
+          last.next = n;
+          n.next = dh;
+          n.prev = last;
+          dh.prev = n;
+          last = n;
+          if (n == endnode) {
+            break;}
+          n = next;}
+        
+        else {
+          if (n == endnode) {
+            break;}
+          n = n.next;}}
+      
+    }

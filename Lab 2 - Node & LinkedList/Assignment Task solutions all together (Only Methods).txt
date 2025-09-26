@@ -1,0 +1,102 @@
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-01--------------------------
+    public static String checkSimilar( Node building1, Node building2 ){
+      
+      String result = "Similar";
+      
+      Node a = building1;
+      Node b = building2;
+      
+      while (a!=null && b!=null) {
+        if (!(a.elem.equals(b.elem))) {
+          result = "Not Similar";
+          break;}
+        a = a.next;
+        b = b.next;}
+      
+      if (a!=null || b!=null) {
+        result = "Not Similar";}
+      
+        return result;
+    }
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-02--------------------------
+    public static int sumDist(Node head, Integer[] distArr) {
+      int sum = 0;
+      for (int i = 0; i<distArr.length; i++) {
+          sum += NodePointAt(head,distArr[i]);}
+      
+        return sum;
+    }
+    public static int NodePointAt(Node head, int i) {
+      int count = 0;
+      Node n = head;
+      while (n!=null) {
+        if (count==i) {
+          return (int)n.elem;}
+        n = n.next;
+        count += 1;}
+      return 0;}
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-03--------------------------
+    public static Node alternateMerge( Node head1, Node head2 ){
+        
+      Node a = head1;
+      Node b = head2;
+      
+      while (b!=null) {
+        Node temp1 = a.next;
+        Node temp2 = b.next;
+        a.next = b;
+        b.next = temp1;
+        b = temp2;
+        a = a.next.next;}
+      
+        return head1;
+    }
+
+  //
+  //
+  //
+  //
+  //------Assignment-Task-04--------------------------
+    public static Node idGenerator(Node head1, Node head2, Node head3) {
+      
+      Node prev = null;
+      Node current = head1;
+      Node last = head1;
+      Node next = null;
+      while (current.next!=null) {
+        next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;}
+      current.next = prev;
+      head1 = current;
+      
+      Node a = head2;
+      Node b = head3;
+      
+      while (a!=null) {
+        int newelem = (int)a.elem + (int)b.elem ;
+        if (newelem >= 10) {
+          newelem %= 10;}
+        last.next = new Node (newelem, null);
+        last = last.next;
+        a = a.next;
+        b = b.next;}
+
+        return head1;
+    }

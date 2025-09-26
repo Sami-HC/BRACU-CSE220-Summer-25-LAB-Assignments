@@ -1,0 +1,43 @@
+//
+//
+//
+//
+//
+//----------------------LAB-06---Task-04------------------------------
+public static void swapChild( BTNode root, int lvl, int M ){
+      if (root!=null && lvl<M) {
+        swapChild(root.left, lvl+1, M);
+        swapChild(root.right, lvl+1, M);
+        BTNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;}
+    }
+//
+//
+//
+//
+//
+//----------------------LAB-06---Task-05------------------------------
+public static Integer subtractSummation( BTNode root ){
+        return sumtree(root.left)-sumtree(root.right);
+    }
+    public static Integer sumtree( BTNode root ){
+      if (root != null) {
+        return (int)root.elem + sumtree(root.right) + sumtree(root.left);}
+      return 0;}
+//
+//
+//
+//
+//
+//----------------------LAB-06---Task-06------------------------------
+public static Integer levelSum( BTNode root ){
+        return findlevelsum (root, 0);
+    }
+    public static Integer findlevelsum(BTNode root, int level){
+      if (root != null) {
+        if (level%2 == 0) {
+          return -(int)root.elem + findlevelsum(root.left, level+1) + findlevelsum(root.right, level+1);}
+        else {
+          return (int)root.elem + findlevelsum(root.left, level+1) + findlevelsum(root.right, level+1);}}
+      return 0;}

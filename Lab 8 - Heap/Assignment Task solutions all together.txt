@@ -1,0 +1,205 @@
+import java.util.Arrays;
+public class HeapTester {
+  public static void main (String [] args) {
+    
+    System.out.println("---------------Testing TASK-3---------------");
+    int [] tasks = {2, 4, 7, 1, 6};
+    int m = 4;
+    int [] expoutput3 = {2, 4, 7, 7};
+    int [] task3output = test.task3(tasks, m);
+    if (Arrays.equals(expoutput3, task3output)) {
+      System.out.println("Congratulations! TASK-3 completed successfully, outputs matched");}
+    else {
+      System.out.println("TASK-3 failed, outputs did not match");}
+    System.out.println("TASK-3 expected output: "+Arrays.toString(expoutput3));
+    System.out.println("TASK-3 output after test: "+Arrays.toString(task3output));
+    
+    
+    System.out.println("---------------Testing TASK-4---------------");
+    int [] nums = {4, 10, 2, 8, 6, 7};
+    int k = 3;
+    int [] expoutput4 = {10, 8, 7};
+    int [] task4output = test.task4(nums, k);
+    if (Arrays.equals(expoutput4, task4output)) {
+      System.out.println("Congratulations! TASK-4 completed successfully, outputs matched");}
+    else {
+      System.out.println("TASK-4 failed, outputs did not match");}
+    System.out.println("TASK-4 expected output: "+Arrays.toString(expoutput4));
+    System.out.println("TASK-4 output after test: "+Arrays.toString(task4output));
+    
+  }
+}
+
+
+
+
+public class test {
+  
+  public static int[] task3 (int [] arr, int m) {
+    MinHeap marr = new MinHeap (m);
+    for (int i = 0; i<arr.length; i++) {
+      if (i<m) {
+        marr.insert(arr[i]);}
+      else {
+        marr.insert( marr.extractMin() + arr[i] );}}
+      return marr.getheap();
+  }
+  
+  public static int[] task4 (int [] arr, int k) {
+    MaxHeap karr = new MaxHeap (arr.length);
+    for (int i = 0; i<arr.length; i++) {
+      karr.insert(arr[i]);}
+    int [] output = new int [k];
+    for (int i = 0; i<output.length; i++) {
+      output[i] = karr.extractMax();}
+    return output;
+  }
+}
+
+
+
+
+public class MinHeap {
+  private int [] heap;
+  private int capacity;
+  private int size;
+  
+  public MinHeap (int capacity) {
+    this.capacity = capacity;
+    this.size = 0;
+    this.heap = new int [capacity+1];}
+  
+  public void insert (int a) {
+    if (size == capacity) {
+      System.out.println("Capacity Full");}
+    else {
+      size = size+1;
+      heap[size] = a;
+      swim(size);}}
+  
+  public int extractMin () {
+    int temp = heap[1];
+    heap[1] = heap[size];
+    heap[size] = temp;
+    size = size-1;
+    sink(1);
+    return temp;}
+  
+  public void sort () {
+    while (size!=0) {
+      int temp = heap[1];
+      heap[1] = heap[size];
+      heap[size] = temp;
+      size = size-1;
+      sink(1);}}
+  
+  public void swim (int i) {
+    while (i!=1) {
+      if (heap[i] < heap[i/2]) {
+        int temp = heap[i];
+        heap[i] = heap[i/2];
+        heap[i/2] = temp;
+        i = i/2;}
+      else {
+        break;}}}
+  
+  public void sink (int i) {
+    while (i<size) {
+      if (((2*i)<=size) && (heap[i] > heap[2*i])) {
+        int temp = heap[i];
+        heap[i] = heap[2*i];
+        heap[2*i] = temp;
+        i = 2*i;}
+      else if ((((2*i)+1)<=size) && (heap[i] > heap[(2*i)+1])) {
+        int temp = heap[i];
+        heap[i] = heap[(2*i)+1];
+        heap[(2*i)+1] = temp;
+        i = (2*i)+1;}
+      else {
+        break;}}}
+  
+  public int [] getheap () {
+    if (size == 0) {
+      System.out.println("Empty Heap");
+      return null;}
+    else {
+      int [] output = new int [size];
+      for (int i = 1; i<=size; i++) {
+        output[i-1] = heap[i];}
+      return output;}}
+  
+}
+
+
+
+
+public class MaxHeap {
+  private int [] heap;
+  private int capacity;
+  private int size;
+  
+  public MaxHeap (int capacity) {
+    this.capacity = capacity;
+    this.size = 0;
+    this.heap = new int [capacity+1];}
+  
+  public void insert (int a) {
+    if (size == capacity) {
+      System.out.println("Capacity Full");}
+    else {
+      size = size+1;
+      heap[size] = a;
+      swim(size);}}
+  
+  public int extractMax () {
+    int temp = heap[1];
+    heap[1] = heap[size];
+    heap[size] = temp;
+    size = size-1;
+    sink(1);
+    return temp;}
+  
+  public void sort () {
+    while (size!=0) {
+      int temp = heap[1];
+      heap[1] = heap[size];
+      heap[size] = temp;
+      size = size-1;
+      sink(1);}}
+  
+  public void swim (int i) {
+    while (i!=1) {
+      if (heap[i] > heap[i/2]) {
+        int temp = heap[i];
+        heap[i] = heap[i/2];
+        heap[i/2] = temp;
+        i = i/2;}
+      else {
+        break;}}}
+  
+  public void sink (int i) {
+    while (i<size) {
+      if (((2*i)<=size) && (heap[i] < heap[2*i])) {
+        int temp = heap[i];
+        heap[i] = heap[2*i];
+        heap[2*i] = temp;
+        i = 2*i;}
+      else if ((((2*i)+1)<=size) && (heap[i] < heap[(2*i)+1])) {
+        int temp = heap[i];
+        heap[i] = heap[(2*i)+1];
+        heap[(2*i)+1] = temp;
+        i = (2*i)+1;}
+      else {
+        break;}}}
+  
+  public int [] getheap () {
+    if (size == 0) {
+      System.out.println("Empty Heap");
+      return null;}
+    else {
+      int [] output = new int [size];
+      for (int i = 1; i<=size; i++) {
+        output[i-1] = heap[i];}
+      return output;}}
+  
+}

@@ -1,0 +1,67 @@
+//
+//
+//
+//
+//---Assignment-Task-01----------------------------------
+private int hashFunction( Integer key ){
+      return (key + 3)%6;
+    }
+public void remove( Integer key ){
+      if (ht[(key + 3)%6] != null) {
+        PairNode n = ht[(key + 3)%6];
+        PairNode prev = null;
+        while (n!=null) {
+          if (n.key==key && n==ht[(key + 3)%6]) {
+            ht[(key + 3)%6] = n.next;}
+          else if (n.key==key) {
+            prev.next = n.next;}
+          prev = n;
+          n = n.next;}}
+    }
+//
+//
+//
+//
+//---Assignment-Task-02----------------------------------
+public static int diamondCount(Stack stack, String str) {
+      int count = 0;
+      
+      for (int i = 0; i<str.length(); i++) {
+        
+        if (str.charAt(i)=='>') {
+          boolean check = true;
+          while (check) {
+            Object store = stack.pop();
+            if (store==null) {
+              check = false;}
+            else if ((char)store=='<') {
+              count += 1;
+              check = false;}}}
+        
+        else if (str.charAt(i)=='<') {
+          stack.push(str.charAt(i));}}
+
+        return count;
+    }
+//
+//
+//
+//
+//---Assignment-Task-03----------------------------------
+public static String removeConsecDups(String word){
+      LinkedListQueue q = new LinkedListQueue ();
+      char last = word.charAt(0);
+      String modified = "";
+      
+      for (int i = 0; i<word.length(); i++) {
+        if (i==0) {
+          q.enqueue(word.charAt(i));}
+        else if (last!=word.charAt(i)) {
+          q.enqueue(word.charAt(i));
+          last = word.charAt(i);}}
+      
+      while (!q.isEmpty()) {
+        modified += (char) q.dequeue();}
+      
+ return modified;
+    }
